@@ -24,14 +24,14 @@ class ViewController: UIViewController {
     
     @IBOutlet var cardButtons: [UIButton]!
     
-    var emojiChoices: [String] = ["🎃", "👻", "🎃", "👻"]
+
     
     @IBAction func touchCard(_ sender: UIButton) {
         flipCount += 1
         if let cardNumber = cardButtons.index(of: sender) {
             game.chooseCard(at: cardNumber)
             updateViewFromModel()
-        print("Card number: \(cardNumber)")
+            print("Card number: \(cardNumber)")
         } else {
             print("Chosen card was not in cardButtons")
         }
@@ -44,26 +44,35 @@ class ViewController: UIViewController {
             let card = game.cards[index]
             
             if card.isFaceUp {
-                button.backgroundColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
-                button.setTitle("", for: .normal)
-            } else {
-                //button.setTitle(emoji, for: .normal)
+                button.setTitle(emoji(for: card), for: .normal)
                 button.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+            } else {
+                button.setTitle("", for: .normal)
+                button.backgroundColor = card.isMatched ? #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 0) : #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
             }
             
         }
     }
     
+    var emojiChoices: [String] = ["🎃", "👻", "🦇","🙀","😈","👹","💩", "💀", "👾", "☠️"]
     
-    func flipCard(withEmoji emoji: String, on button: UIButton) {
-        if button.currentTitle == emoji {
-            button.backgroundColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
-            button.setTitle("", for: .normal)
-        } else {
-            button.setTitle(emoji, for: .normal)
-            button.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-            
+    //var emoji = Dictionary<Int,String>()
+    var emoji = [Int:String]()
+    
+    
+    func emoji(for card: Card) -> String {
+        if emoji[card.identifier] == nil,emojiChoices.count > 0 {
+            let randomIndex = Int(arc4random_uniform(UInt32(emojiChoices.count)))
+            emoji[card.identifier] = emojiChoices.remove(at: randomIndex)
         }
+        
+//        if emoji[card.identifier] != nil {
+//            return emoji[card.identifier]!
+//        } else {
+//            return "?"
+//        }
+        return emoji[card.identifier] ?? "?"
+        
     }
     
 }

@@ -14,9 +14,7 @@ struct Concentration {
     
     private var indexOfOneAndOnlyFaceUpCard: Int? {
         get {
-            let faceUpCardIndices = cards.indices.filter { cards[$0].isFaceUp}
-            
-            return faceUpCardIndices.count == 1 ? faceUpCardIndices.first : nil
+            return cards.indices.filter { cards[$0].isFaceUp}.oneAndOnly
             
 //            var foundIndex: Int?
 //
@@ -67,4 +65,10 @@ struct Concentration {
         cards.shuffle()
     }
     
+}
+
+extension Collection {
+    var oneAndOnly: Element? {
+        return count == 1 ? first : nil
+    }
 }

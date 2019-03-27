@@ -12,6 +12,8 @@ class ViewController: UIViewController {
 
     private lazy var game: Concentration = Concentration(numberOfPairsOfCards: numberOfPairOfCards)
     
+    var previousCard: UIButton?
+    
     var numberOfPairOfCards: Int {
         return (cardButtons.count + 1)/2
     }
@@ -60,6 +62,17 @@ class ViewController: UIViewController {
     
     
     @IBAction private func touchCard(_ sender: UIButton) {
+//        if previousCard != nil{
+//            if previousCard != sender {
+//                flipCount += 1
+//            } else {
+//                //do nothing
+//            }
+//        } else {
+//            flipCount += 1
+//        }
+//        previousCard = sender
+
         flipCount += 1
         if let cardNumber = cardButtons.index(of: sender) {
             game.chooseCard(at: cardNumber)

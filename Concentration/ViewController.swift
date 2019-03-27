@@ -92,13 +92,6 @@ class ViewController: UIViewController {
     
     private lazy var emojiChoices: String = getRandomtheme()
     
-//    private var emojiChoices: String  {
-//        get {
-//            getRandomtheme()
-//        }
-//    }
-
-    
     func getRandomtheme() -> String {
         let themeList: [String:String] = [
             "themeHalloween": "🎃👻🦇🙀😈👹💀👾🤡👁",

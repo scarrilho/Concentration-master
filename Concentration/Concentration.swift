@@ -12,6 +12,9 @@ struct Concentration {
     
     private(set) var cards = Array<Card>()
     
+    private var cardsShown: [Int] = []
+    private var score: Int = 0
+    
     private var indexOfOneAndOnlyFaceUpCard: Int? {
         get {
             return cards.indices.filter { cards[$0].isFaceUp}.oneAndOnly
@@ -37,13 +40,19 @@ struct Concentration {
     }
     
     mutating func chooseCard(at index: Int) {
-        //cards[index].isFaceUp = !cards[index].isFaceUp
+        if let _ = cardsShown.firstIndex(of: index) {
+            //skip
+        } else {
+            cardsShown.append(index)
+        }
+
         assert(cards.indices.contains(index), "Concentration.chooseCard(at: \(index)): chosen index not in cards")
         if !cards[index].isMatched {
             if let matchIndex = indexOfOneAndOnlyFaceUpCard, matchIndex != index {
                 if cards[index] == cards[matchIndex] {
                     cards[index].isMatched = true
                     cards[matchIndex].isMatched = true
+                    score += 1
                 }
                 cards[index].isFaceUp = true
             } else {

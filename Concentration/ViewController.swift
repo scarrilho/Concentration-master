@@ -54,7 +54,7 @@ class ViewController: UIViewController {
     @IBAction private func newGameTapped(_ sender: UIButton) {
         game = Concentration(numberOfPairsOfCards: numberOfPairOfCards)
         flipCount = 0
-        emojiChoices = "🎃👻🦇🙀😈👹💩💀👾☠️"
+        emojiChoices = getRandomtheme()
         updateViewFromModel()
         updateFlipCountLabel()
         
@@ -62,16 +62,6 @@ class ViewController: UIViewController {
     
     
     @IBAction private func touchCard(_ sender: UIButton) {
-//        if previousCard != nil{
-//            if previousCard != sender {
-//                flipCount += 1
-//            } else {
-//                //do nothing
-//            }
-//        } else {
-//            flipCount += 1
-//        }
-//        previousCard = sender
 
         flipCount += 1
         if let cardNumber = cardButtons.index(of: sender) {
@@ -100,8 +90,32 @@ class ViewController: UIViewController {
         }
     }
     
-    private var emojiChoices = "🎃👻🦇🙀😈👹💩💀👾☠️"
+    private lazy var emojiChoices: String = getRandomtheme()
+    
+//    private var emojiChoices: String  {
+//        get {
+//            getRandomtheme()
+//        }
+//    }
 
+    
+    func getRandomtheme() -> String {
+        let themeList: [String:String] = [
+            "themeHalloween": "🎃👻🦇🙀😈👹💀👾🤡👁",
+            "themeAnimals": "🐶🐻🐼🦢🕊🐯🦁🐮🐥🐤🐔🐝🦄🦀🦓🐎",
+            "themeWeather": "🌦🌤☀️🌈⛈❄️🌬☔️☂️☃️⛄️🌩🌧",
+            "themeFood": "🍎🍏🍌🍉🍒🍓🍆🥗🍜🍙🍰🍩",
+            "themeFaces": "😆😘😍🧐😎🥳😖😢🥵🥶😵",
+            "themeTransportation": "🚘🚗🚅✈️⛵️🚁🛸🚒🏎🚓🚑🚌🚕"
+            ]
+        
+        let themesKeys = Array(themeList.keys)
+        let randomKey = themesKeys[themesKeys.count.arc4random]
+        
+        return themeList[randomKey]!
+        
+    }
+    
     //var emoji = Dictionary<Int,String>()
     private var emoji = [Card:String]()
     

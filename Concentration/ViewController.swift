@@ -50,6 +50,11 @@ class ViewController: UIViewController {
     @IBOutlet private var cardButtons: [UIButton]!
     
     @IBAction private func newGameTapped(_ sender: UIButton) {
+        game = Concentration(numberOfPairsOfCards: numberOfPairOfCards)
+        flipCount = 0
+        emojiChoices = "🎃👻🦇🙀😈👹💩💀👾☠️"
+        updateViewFromModel()
+        updateFlipCountLabel()
         
     }
     
@@ -82,7 +87,6 @@ class ViewController: UIViewController {
         }
     }
     
-    //private var emojiChoices: [String] = ["🎃", "👻", "🦇","🙀","😈","👹","💩", "💀", "👾", "☠️"]
     private var emojiChoices = "🎃👻🦇🙀😈👹💩💀👾☠️"
 
     //var emoji = Dictionary<Int,String>()

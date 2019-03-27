@@ -27,7 +27,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Bne-8M-Fmy">
-                                <rect key="frame" x="16" y="44" width="343" height="272"/>
+                                <rect key="frame" x="16" y="94" width="343" height="272"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="CTL-vx-CZn">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="48"/>
@@ -216,15 +216,28 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z3f-Qa-FEY">
+                                <rect key="frame" x="16" y="44" width="97" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="New Game">
+                                    <color key="titleColor" red="0.0" green="0.83529411760000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="newGameTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="grR-5O-P0J"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                         <constraints>
-                            <constraint firstItem="Bne-8M-Fmy" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="5NP-xb-h33"/>
+                            <constraint firstItem="Z3f-Qa-FEY" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="5ji-oW-HJd"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Z3f-Qa-FEY" secondAttribute="trailing" constant="262" id="868-Ga-v8p"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Bne-8M-Fmy" secondAttribute="trailing" constant="16" id="C0a-8l-RUZ"/>
                             <constraint firstItem="ULy-XF-WgJ" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Bne-8M-Fmy" secondAttribute="bottom" constant="8" symbolic="YES" id="Hcq-TK-9S3"/>
                             <constraint firstItem="Bne-8M-Fmy" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="NZB-n7-1CJ"/>
                             <constraint firstItem="ULy-XF-WgJ" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Nuc-Ai-9ex"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="ULy-XF-WgJ" secondAttribute="bottom" constant="20" id="VTn-7s-pnP"/>
+                            <constraint firstItem="Bne-8M-Fmy" firstAttribute="top" secondItem="Z3f-Qa-FEY" secondAttribute="bottom" constant="14" id="eru-BA-p7O"/>
+                            <constraint firstItem="Z3f-Qa-FEY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="qIh-iY-dcC"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

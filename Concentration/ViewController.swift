@@ -49,7 +49,10 @@ class ViewController: UIViewController {
     
     @IBOutlet private var cardButtons: [UIButton]!
     
-
+    @IBAction private func newGameTapped(_ sender: UIButton) {
+        
+    }
+    
     
     @IBAction private func touchCard(_ sender: UIButton) {
         flipCount += 1

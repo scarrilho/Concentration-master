@@ -37,6 +37,7 @@ class ViewController: UIViewController {
         flipCountLabel.attributedText = attributedString
     }
     
+    @IBOutlet weak var scoreLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,6 +89,9 @@ class ViewController: UIViewController {
             }
             
         }
+        
+        //Review this
+        scoreLabel.text! = "Score: \(game.score)"
     }
     
     private lazy var emojiChoices: String = getRandomtheme()

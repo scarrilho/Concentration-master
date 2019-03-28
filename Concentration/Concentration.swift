@@ -13,7 +13,8 @@ struct Concentration {
     private(set) var cards = Array<Card>()
     
     private var cardsShown: [Int] = []
-    private var score: Int = 0
+    
+    var score: Int = 0
     
     private var indexOfOneAndOnlyFaceUpCard: Int? {
         get {

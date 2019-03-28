@@ -18,12 +18,12 @@ class ViewController: UIViewController {
         return (cardButtons.count + 1)/2
     }
     
-    private(set) var flipCount = 0 {
-        didSet {
-            updateFlipCountLabel()
-        }
-        
-    }
+//    private(set) var flipCount = 0 {
+//        didSet {
+//            updateFlipCountLabel()
+//        }
+//
+//    }
     
     private func updateFlipCountLabel() {
         let attributes: [NSAttributedString.Key: Any] = [
@@ -31,7 +31,7 @@ class ViewController: UIViewController {
             .strokeColor: #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1)
         ]
         
-        let attributedString = NSAttributedString(string: "Flips = \(flipCount)", attributes: attributes)
+        let attributedString = NSAttributedString(string: "Flips = \(game.flipCount)", attributes: attributes)
         
         flipCountLabel.attributedText = attributedString
     }
@@ -53,7 +53,7 @@ class ViewController: UIViewController {
     
     @IBAction private func newGameTapped(_ sender: UIButton) {
         game = Concentration(numberOfPairsOfCards: numberOfPairOfCards)
-        flipCount = 0
+        //flipCount = 0
         emojiChoices = getRandomtheme()
         updateViewFromModel()
         updateFlipCountLabel()
@@ -63,7 +63,7 @@ class ViewController: UIViewController {
     
     @IBAction private func touchCard(_ sender: UIButton) {
 
-        flipCount += 1
+        //flipCount += 1
         if let cardNumber = cardButtons.index(of: sender) {
             game.chooseCard(at: cardNumber)
             updateViewFromModel()
@@ -90,7 +90,8 @@ class ViewController: UIViewController {
         }
         
         //Review this
-        scoreLabel.text! = "Score: \(game.score)"
+        scoreLabel.text = "Score: \(game.score)"
+        updateFlipCountLabel()
     }
     
     private lazy var emojiChoices: String = getRandomtheme()

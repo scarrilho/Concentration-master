@@ -13,6 +13,7 @@ struct Concentration {
     private(set) var cards = Array<Card>()
     
     private var cardsShown: [Int] = []
+    private(set) var flipCount = 0
     
     private(set) var score: Int = 0
     
@@ -33,6 +34,7 @@ struct Concentration {
         assert(cards.indices.contains(index), "Concentration.chooseCard(at: \(index)): chosen index not in cards")
     
         if !cards[index].isMatched {
+            flipCount += 1
             if let matchIndex = indexOfOneAndOnlyFaceUpCard, matchIndex != index {
                 if cards[index] == cards[matchIndex] {
                     cards[index].isMatched = true
@@ -67,6 +69,7 @@ struct Concentration {
         assert(numberOfPairsOfCards > 0, "Concentration.init(\(numberOfPairsOfCards)): you must at least have one pair of cards")
         
         score = 0
+        flipCount = 0
         cardsShown = []
         
         for _ in 1...numberOfPairsOfCards {

@@ -40,19 +40,19 @@ struct Concentration {
     }
     
     mutating func chooseCard(at index: Int) {
-        if let _ = cardsShown.firstIndex(of: index) {
-            //skip
-        } else {
-            cardsShown.append(index)
-        }
 
         assert(cards.indices.contains(index), "Concentration.chooseCard(at: \(index)): chosen index not in cards")
+    
         if !cards[index].isMatched {
             if let matchIndex = indexOfOneAndOnlyFaceUpCard, matchIndex != index {
                 if cards[index] == cards[matchIndex] {
                     cards[index].isMatched = true
                     cards[matchIndex].isMatched = true
-                    score += 1
+                    score += 2
+                } else {//Cards didn't match
+                    if isIndexInCardShownArray(cardIndex: matchIndex) {score -= 1}
+                    if isIndexInCardShownArray(cardIndex: index) {score -= 1}
+                    
                 }
                 cards[index].isFaceUp = true
             } else {
@@ -61,11 +61,25 @@ struct Concentration {
             }
         }
         
+        print("Score : \(score)")
+        
+    }
+    
+    private mutating func isIndexInCardShownArray(cardIndex: Int) -> Bool {
+        if let _ = cardsShown.firstIndex(of: cardIndex) {
+            return true
+        } else {
+            cardsShown.append(cardIndex)
+            return false
+        }
     }
     
     init (numberOfPairsOfCards: Int) {
         assert(numberOfPairsOfCards > 0, "Concentration.init(\(numberOfPairsOfCards)): you must at least have one pair of cards")
-
+        
+        score = 0
+        cardsShown = []
+        
         for _ in 1...numberOfPairsOfCards {
             let card = Card()
             cards += [card,card]

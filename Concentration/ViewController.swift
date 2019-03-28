@@ -21,7 +21,6 @@ class ViewController: UIViewController {
     private(set) var flipCount = 0 {
         didSet {
             updateFlipCountLabel()
-        
         }
         
     }

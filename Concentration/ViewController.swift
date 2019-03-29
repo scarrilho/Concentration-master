@@ -41,21 +41,14 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        currentTheme = getRandomtheme()
+        emojiChoices = currentTheme?.icons ?? "?"
         self.view.backgroundColor = currentTheme?.viewBG
         updateViewFromModel()
 
         // Do any additional setup after loading the view, typically from a nib.
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        currentTheme = getRandomtheme()
-        emojiChoices = currentTheme?.icons ?? "?"
-
-        
-        
-    }
-    
     @IBOutlet private weak var flipCountLabel: UILabel! {
         didSet {
             updateFlipCountLabel()
@@ -103,40 +96,19 @@ class ViewController: UIViewController {
             
         }
         
-       // self.view.backgroundColor = #colorLiteral(red: 0.2196078449, green: 0.007843137719, blue: 0.8549019694, alpha: 1)
-        
         scoreLabel.text = "Score: \(game.score)"
         updateFlipCountLabel()
         
     }
     
-    //private lazy var emojiChoices: String = getRandomtheme()
-
-//    func getRandomthemeOld() -> String {
-//        let themeList: [String:String] = [
-//            "themeHalloween": "🎃👻🦇🙀😈👹💀👾🤡👁",
-//            "themeAnimals": "🐶🐻🐼🦢🕊🐯🦁🐮🐥🐤🐔🐝🦄🦀🦓🐎",
-//            "themeWeather": "🌦🌤☀️🌈⛈❄️🌬☔️☂️☃️⛄️🌩🌧",
-//            "themeFood": "🍎🍏🍌🍉🍒🍓🍆🥗🍜🍙🍰🍩",
-//            "themeFaces": "😆😘😍🧐😎🥳😖😢🥵🥶😵",
-//            "themeTransportation": "🚘🚗🚅✈️⛵️🚁🛸🚒🏎🚓🚑🚌🚕"
-//            ]
-//
-//        let themesKeys = Array(themeList.keys)
-//        let randomKey = themesKeys[themesKeys.count.arc4random]
-//
-//        return themeList[randomKey]!
-//
-//    }
-    
     private func getRandomtheme() -> Theme {
         var themeArray: [Theme] = []
         let themeHalloween = Theme(icons: "🎃👻🦇🙀😈👹💀👾🤡👁", cardBG: #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1), viewBG: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
-        let themeAnimals = Theme(icons: "🐶🐻🐼🦢🕊🐯🦁🐮🐥🐤🐔🐝🦄🦀🦓🐎", cardBG: #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1), viewBG: #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1))
-        let themeWeather = Theme(icons: "🌦🌤☀️🌈⛈❄️🌬☔️☂️☃️⛄️🌩🌧", cardBG: #colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1), viewBG: #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1))
-        let themeFood = Theme(icons: "🍎🍏🍌🍉🍒🍓🍆🥗🍜🍙🍰🍩", cardBG: #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1), viewBG: #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1))
-        let themeFaces = Theme(icons: "😆😘😍🧐😎😖😢🤓🤪😵", cardBG: #colorLiteral(red: 0.06274510175, green: 0, blue: 0.1921568662, alpha: 1), viewBG: #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1))
-        let themeTransportation = Theme(icons: "🚘🚗🚅✈️⛵️🚁🛸🚒🏎🚓🚑🚌🚕", cardBG: #colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1), viewBG: #colorLiteral(red: 0.1764705926, green: 0.01176470611, blue: 0.5607843399, alpha: 1))
+        let themeAnimals = Theme(icons: "🐶🐻🐼🦢🕊🐯🦁🐮🐥🐤🐔🐝🦄🦀🦓🐎", cardBG: #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1), viewBG: #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1))
+        let themeWeather = Theme(icons: "🌦🌤☀️🌈⛈❄️🌬☔️☂️☃️⛄️🌩🌧", cardBG: #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1), viewBG: #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1))
+        let themeFood = Theme(icons: "🍎🍏🍌🍉🍒🍓🍆🥗🍜🍙🍰🍩", cardBG: #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1), viewBG: #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1))
+        let themeFaces = Theme(icons: "😆😘😍🧐😎😖😢🤓🤪😵", cardBG: #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1), viewBG: #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1))
+        let themeTransportation = Theme(icons: "🚘🚗🚅✈️⛵️🚁🛸🚒🏎🚓🚑🚌🚕", cardBG: #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1), viewBG: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))
         
         themeArray += [themeHalloween, themeAnimals, themeWeather, themeFood, themeFaces, themeTransportation]
 

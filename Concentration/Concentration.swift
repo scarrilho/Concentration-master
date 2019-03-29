@@ -52,7 +52,7 @@ struct Concentration {
             }
         }
         
-        print("Score : \(score)")
+        //print("Score : \(score)")
         
     }
     

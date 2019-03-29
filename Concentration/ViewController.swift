@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController {
     private lazy var game: Concentration = Concentration(numberOfPairsOfCards: numberOfPairOfCards)
     private var currentTheme: Theme?
-    private var emojiChoices: String = "?"
+    private var emojiChoices: String = ""
     
     var previousCard: UIButton?
     
@@ -26,34 +26,74 @@ class ViewController: UIViewController {
 //
 //    }
     
+    @IBOutlet private weak var scoreLabel: UILabel! {
+        didSet {
+            updateScoreLabels()
+        }
+    }
+    
+    @IBOutlet private weak var flipCountLabel: UILabel! {
+        didSet {
+            updateFlipCountLabel()
+            //updateUILabels()
+        }
+    }
+    
+    
+    
     private func updateFlipCountLabel() {
         let attributes: [NSAttributedString.Key: Any] = [
             .strokeWidth : 5.0,
-            .strokeColor: #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1)
+            //.strokeColor: #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1)
+            .strokeColor: currentTheme?.cardBG ??  #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1)//same color as card background
         ]
-        
+
         let attributedString = NSAttributedString(string: "Flips = \(game.flipCount)", attributes: attributes)
-        
+
         flipCountLabel.attributedText = attributedString
     }
     
-    @IBOutlet weak var scoreLabel: UILabel!
+
+    
+//    private func updateUILabels() {
+//        let attributes: [NSAttributedString.Key: Any] = [
+//            .strokeWidth : 5.0,
+//            //.strokeColor: #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1)
+//            .strokeColor: currentTheme?.cardBG ??  #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1)//same color as card background
+//        ]
+//
+//        let labelAttributedString = NSAttributedString(string: "Flips: \(game.flipCount)", attributes: attributes)
+//        //let scoreAttributedString = NSAttributedString(string: "Score: \(game.score)", attributes: attributes)
+//
+//        flipCountLabel.attributedText = labelAttributedString
+//        //scoreLabel.attributedText = scoreAttributedString
+//    }
+    
+
+    private func updateScoreLabels() {
+        let attributes: [NSAttributedString.Key: Any] = [
+            .strokeWidth : 5.0,
+            //.strokeColor: #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1)
+            .strokeColor: currentTheme?.cardBG ??  #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1)//same color as card background
+        ]
+        
+        let scoreAttributedString = NSAttributedString(string: "Score: \(game.score)", attributes: attributes)
+        
+        scoreLabel.attributedText = scoreAttributedString
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         currentTheme = getRandomtheme()
-        emojiChoices = currentTheme?.icons ?? "?"
-        self.view.backgroundColor = currentTheme?.viewBG
+        emojiChoices = currentTheme?.icons ?? ""
+        self.view.backgroundColor = currentTheme?.viewBG ?? #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         updateViewFromModel()
 
         // Do any additional setup after loading the view, typically from a nib.
     }
+    
 
-    @IBOutlet private weak var flipCountLabel: UILabel! {
-        didSet {
-            updateFlipCountLabel()
-        }
-    }
     
     @IBOutlet private var cardButtons: [UIButton]!
     
@@ -62,7 +102,11 @@ class ViewController: UIViewController {
         currentTheme = getRandomtheme()
         emojiChoices = currentTheme?.icons ?? "?"
         updateViewFromModel()
+        
+        //updateUILabels()
         updateFlipCountLabel()
+        updateScoreLabels()
+        
         self.view.backgroundColor = currentTheme?.viewBG
         
     }
@@ -78,7 +122,6 @@ class ViewController: UIViewController {
         } else {
             print("Chosen card was not in cardButtons")
         }
-        
     }
     
     private func updateViewFromModel() {
@@ -93,11 +136,10 @@ class ViewController: UIViewController {
                 button.setTitle("", for: .normal)
                 button.backgroundColor = card.isMatched ? #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 0) : currentTheme?.cardBG
             }
-            
         }
         
-        scoreLabel.text = "Score: \(game.score)"
         updateFlipCountLabel()
+        updateScoreLabels()
         
     }
     

@@ -19,13 +19,6 @@ class ViewController: UIViewController {
         return (cardButtons.count + 1)/2
     }
     
-//    private(set) var flipCount = 0 {
-//        didSet {
-//            updateFlipCountLabel()
-//        }
-//
-//    }
-    
     @IBOutlet private weak var scoreLabel: UILabel! {
         didSet {
             //updateScoreLabels()
@@ -39,31 +32,6 @@ class ViewController: UIViewController {
             updateUILabels()
         }
     }
-    
-//    private func updateFlipCountLabel() {
-//        let attributes: [NSAttributedString.Key: Any] = [
-//            .strokeWidth : 5.0,
-//            //.strokeColor: #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1)
-//            .strokeColor: currentTheme?.cardBG ??  #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1)//same color as card background
-//        ]
-//
-//        let attributedString = NSAttributedString(string: "Flips = \(game.flipCount)", attributes: attributes)
-//
-//        flipCountLabel.attributedText = attributedString
-//    }
-//
-//
-//    private func updateScoreLabels() {
-//        let attributes: [NSAttributedString.Key: Any] = [
-//            .strokeWidth : 5.0,
-//            //.strokeColor: #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1)
-//            .strokeColor: currentTheme?.cardBG ??  #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1)//same color as card background
-//        ]
-//
-//        let scoreAttributedString = NSAttributedString(string: "Score: \(game.score)", attributes: attributes)
-//
-//        scoreLabel.attributedText = scoreAttributedString
-//    }
 
     private func updateUILabels() {
         let attributes: [NSAttributedString.Key: Any] = [
@@ -83,9 +51,6 @@ class ViewController: UIViewController {
         }
     }
     
-
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         currentTheme = getRandomtheme()
@@ -95,9 +60,7 @@ class ViewController: UIViewController {
 
         // Do any additional setup after loading the view, typically from a nib.
     }
-    
 
-    
     @IBOutlet private var cardButtons: [UIButton]!
     
     @IBAction private func newGameTapped(_ sender: UIButton) {
@@ -107,21 +70,15 @@ class ViewController: UIViewController {
         updateViewFromModel()
         
         updateUILabels()
-//        updateFlipCountLabel()
-//        updateScoreLabels()
-        
+
         self.view.backgroundColor = currentTheme?.viewBG
-        
     }
     
     
     @IBAction private func touchCard(_ sender: UIButton) {
-
-        //flipCount += 1
         if let cardNumber = cardButtons.index(of: sender) {
             game.chooseCard(at: cardNumber)
             updateViewFromModel()
-            //print("Card number: \(cardNumber)")
         } else {
             print("Chosen card was not in cardButtons")
         }
@@ -142,8 +99,6 @@ class ViewController: UIViewController {
         }
         
         updateUILabels()
-//        updateFlipCountLabel()
-//        updateScoreLabels()
         
     }
     
@@ -162,21 +117,16 @@ class ViewController: UIViewController {
         let randomTheme = themeArray[themeArray.count.arc4random]
         
         return randomTheme
-        
     }
     
-    //var emoji = Dictionary<Int,String>()
     private var emoji = [Card:String]()
-    
     
     private func emoji(for card: Card) -> String {
         if emoji[card] == nil,emojiChoices.count > 0 {
             let randomStringIndex = emojiChoices.index(emojiChoices.startIndex, offsetBy: emojiChoices.count.arc4random)
             emoji[card] = String(emojiChoices.remove(at: randomStringIndex))
         }
-        
         return emoji[card] ?? "?"
-        
     }
     
 }
